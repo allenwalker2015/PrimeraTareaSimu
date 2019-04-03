@@ -49,3 +49,22 @@
 
 1553537444 c:\users\enmanuel\desktop\fem1d\sel.h
 
+1554307844 source:c:\users\elect\desktop\fem1d\main.cpp
+	<iostream>
+	"math_tools.h"
+	"classes.h"
+	"tools.h"
+	"sel.h"
+
+1553740395 c:\users\elect\desktop\fem1d\math_tools.h
+	<vector>
+	"math.h"
+	"stdlib.h"
+
+1553734383 c:\users\elect\desktop\fem1d\classes.h
+
+1553733652 c:\users\elect\desktop\fem1d\tools.h
+	<fstream>
+
+1554309071 c:\users\elect\desktop\fem1d\sel.h
+

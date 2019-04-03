@@ -66,8 +66,10 @@ Matrix createLocalK(int element, mesh &m)
     //De acuerdo a la formulaci�n, la matriz local K tiene la forma:
     //          (k/l)*[ 1 -1 ; -1 1 ]
 
-    float l = m.getElements()[element].getNode2() - m.getElements()[element].getNode1();
-    cout<<"Local B => La L es:"<<l;
+    float l = m.getNodes()[element + 1].getX() -  m.getNodes()[element].getX();
+    cout << "El elemento Xn es:" <<m.getNodes()[element].getX();
+    cout << "El elemento Xn+1 es:" <<m.getNodes()[element+1].getX();
+    cout << "Local K => La L es:" << l << endl;
     //Se extraen del objeto mesh los valores de k y l
     float k = m.getParameter(THERMAL_CONDUCTIVITY);
     //Se crean las filas
@@ -96,8 +98,8 @@ Vector createLocalb(int element, mesh &m)
     //          (Q*l/2)*[ 1 ; 1 ]
 
     //Se extraen del objeto mesh los valores de Q y l
-    float l = m.getElements()[element].getNode2() - m.getElements()[element].getNode1();
-    cout<<"Local B => La L es:"<<l;
+    float l = m.getNodes()[element + 1].getX() -  m.getNodes()[element].getX();
+    //cout<<"Local B => La L es:"<<l;
 
     float Q = m.getParameter(HEAT_SOURCE);
     //Se insertan los datos en el vector
