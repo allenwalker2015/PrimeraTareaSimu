@@ -57,7 +57,7 @@ void showbs(vector<Vector> bs)
 //- El objeto mesh
 //La funci�n construye la matrix local K para el elemento
 //especificado de acuerdo a la formulaci�n del problema
-Matrix createLocalK(int element, mesh &m)
+Matrix createLocalK(int element_i, mesh &m)
 {
     //Se prepara la matriz y sus dos filas (se sabe que es una matriz 2x2)
     Matrix K;
@@ -65,10 +65,11 @@ Matrix createLocalK(int element, mesh &m)
 
     //De acuerdo a la formulaci�n, la matriz local K tiene la forma:
     //          (k/l)*[ 1 -1 ; -1 1 ]
+    element el = m.getElements()[element_i];
+    float l = m.getNodes()[el.getNode2() - 1].getX() - m.getNodes()[el.getNode1() - 1].getX();
 
-    float l = m.getNodes()[element + 1].getX() -  m.getNodes()[element].getX();
-    cout << "El elemento Xn es:" <<m.getNodes()[element].getX();
-    cout << "El elemento Xn+1 es:" <<m.getNodes()[element+1].getX();
+    cout << "El elemento Xn es:" << m.getNodes()[el.getNode1() - 1].getX();
+    cout << "El elemento Xn+1 es:" << m.getNodes()[el.getNode2() - 1].getX();
     cout << "Local K => La L es:" << l << endl;
     //Se extraen del objeto mesh los valores de k y l
     float k = m.getParameter(THERMAL_CONDUCTIVITY);
@@ -89,7 +90,7 @@ Matrix createLocalK(int element, mesh &m)
 //- El objeto mesh
 //La funci�n construye el vector local b para el elemento
 //especificado de acuerdo a la formulaci�n del problema
-Vector createLocalb(int element, mesh &m)
+Vector createLocalb(int element_i, mesh &m)
 {
     //Se prepara el vector b (se sabe que ser� un vector 2x1)
     Vector b;
@@ -98,7 +99,8 @@ Vector createLocalb(int element, mesh &m)
     //          (Q*l/2)*[ 1 ; 1 ]
 
     //Se extraen del objeto mesh los valores de Q y l
-    float l = m.getNodes()[element + 1].getX() -  m.getNodes()[element].getX();
+    element el = m.getElements()[element_i];
+    float l = m.getNodes()[el.getNode2() - 1].getX() - m.getNodes()[el.getNode1() - 1].getX();
     //cout<<"Local B => La L es:"<<l;
 
     float Q = m.getParameter(HEAT_SOURCE);
